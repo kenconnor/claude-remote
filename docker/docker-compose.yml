@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  claude-remote:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: claude-remote:latest
+    container_name: claude-remote
+    restart: unless-stopped
+    environment:
+      - GDRIVE_MOUNT_PATH=/gdrive/claude-remote
+      - PROJECTS_DIR=/projects
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    volumes:
+      - ${GDRIVE_MOUNT_PATH}:/gdrive/claude-remote:ro
+      - ./projects:/projects
+      - ./claude_remote:/app/claude_remote
+      - ./config:/app/config
+      - ~/.claude:/root/.claude:rw
+      - ~/.claude.json:/root/.claude.json:rw
+    working_dir: /app
+    command: python3 -m claude_remote.main
+    networks:
+      - claude-remote-net
+    mem_limit: 2g
+    cpus: 1.0
+
+networks:
+  claude-remote-net:
+    driver: bridge
