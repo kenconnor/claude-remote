@@ -17,18 +17,18 @@ Claude RemoteはObsidian + Google Drive + Claude Codeを組み合わせた、リ
 
 ```mermaid
 graph TD
-    subgraph "📱 Android"
+    subgraph Android["📱 Android"]
         A[Obsidian App] --> B[Markdown Files]
         B --> C[FolderSync]
     end
     
-    subgraph "☁️ Google Drive"
+    subgraph GoogleDrive["☁️ Google Drive"]
         C --> D[Google Drive Storage]
         D --> E[Obsidian Directory]
     end
     
-    subgraph "🖥️ Ubuntu PC"
-        F[Google Drive OCamlfuse] --> G[/gdrive/claude-remote]
+    subgraph UbuntuPC["🖥️ Ubuntu PC"]
+        F[Google Drive OCamlfuse] --> G["/gdrive/claude-remote"]
         E --> F
         
         H[Claude Remote] --> I[Hash File Watcher]
@@ -45,10 +45,10 @@ graph TD
         N --> P[Project Directory]
         O --> P
         
-        P --> Q[/projects/project_timestamp/]
-        Q --> R[src/]
-        Q --> S[logs/]
-        Q --> T[CLAUDE.md]
+        P --> Q["/projects/project_timestamp/"]
+        Q --> R["src/"]
+        Q --> S["logs/"]
+        Q --> T["CLAUDE.md"]
         
         L --> U[Question Detection]
         U -->|Questions Found| V[Append to Original MD]
@@ -58,9 +58,9 @@ graph TD
         W --> X[Slack Webhook]
     end
     
-    subgraph "💬 Slack"
+    subgraph Slack["💬 Slack"]
         X --> Y[Channel Notifications]
-        Y --> Z[📱 Mobile/🖥️ Desktop]
+        Y --> Z["📱 Mobile/🖥️ Desktop"]
     end
     
     style A fill:#e1f5fe
